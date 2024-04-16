@@ -17,12 +17,10 @@ public class UserIMPL implements UserService{
 
     @Override
     public String addUser(UserDto userDto) {
-        if (userRepo.existsByEmail(userDto.getemail())) {
-            return "Email already exists";
+        if (userRepo.existsByEmail(userDto.getemail())  || userRepo.existsByPhone(userDto.getphone())) {
+            return "User already exists";
         }
-        if (userRepo.existsByPhone(userDto.getphone())) {
-            return "Phone number already exists";
-        }
+
         User user = new User(
             userDto.getid(),
             userDto.getfirstName(),
@@ -33,7 +31,7 @@ public class UserIMPL implements UserService{
             userDto.getlocation()
             );
         userRepo.save(user);
-    return user.getFirstName();
+    return user.getFirstName()+" Registered Successfully";
     }
 }
 

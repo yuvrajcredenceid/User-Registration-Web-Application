@@ -21,11 +21,11 @@ public class UserDto {
         this.location = location;
     
     }
-    //empty constructor
+    
     public UserDto(){
     
     }
-    // getter and setter methods
+    
     public int getid() {
         return id;
     }

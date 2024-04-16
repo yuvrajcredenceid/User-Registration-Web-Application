@@ -84,27 +84,46 @@ function CreateAccount() {
       body: JSON.stringify(userData),
       redirect: "follow"
     };
-  
+    
     try {
-      const response = await fetch('http://localhost:8080/api/v1/user/save', requestOptions);
-    
-      console.log('Response:', response);
-    
+      const response = await fetch("http://localhost:8080/api/v1/user/save", requestOptions);
+      
       if (response.ok) {
         console.log('User registered successfully!');
-        setPopupMessage('User registered successfully!');
-        setShowPopup(true); // Show the success popup
+        const data = await response.text(); // get text response
+        setPopupMessage(data); 
+        setShowPopup(true); 
         resetForm();
       } else {
-        console.error('Failed to register user:', response.statusText);
+        throw new Error('Failed to register user:', response.statusText);
         setPopupMessage('Failed to register user');
         setShowPopup(true);
       }
     } catch (error) {
       console.error('Error registering user:', error);
-      setPopupMessage('Error registering user');
+      setPopupMessage(error.message); // Set the error message
       setShowPopup(true);
     }
+    // try {
+    //   const response = await fetch('http://localhost:8080/api/v1/user/save', requestOptions);
+    
+    //   console.log('Response:', response);
+      
+    //   if (response.ok) {
+    //     console.log('User registered successfully!');
+    //     setPopupMessage('User registered successfully!');
+    //     setShowPopup(true); // Show the success popup
+    //     resetForm();
+    //   } else {
+    //     console.error('Failed to register user:', response.statusText);
+    //     setPopupMessage('Failed to register user');
+    //     setShowPopup(true);
+    //   }
+    // } catch (error) {
+    //   console.error('Error registering user:', error);
+    //   setPopupMessage('Error registering user');
+    //   setShowPopup(true);
+    // }
   };
 
   return (

@@ -86,7 +86,7 @@ function CreateAccount() {
     };
     
     try {
-      const response = await fetch("http://localhost:8080/api/v1/user/save", requestOptions);
+      const response = await fetch("http://54.252.169.176:8081/api/v1/user/save", requestOptions);
       
       if (response.ok) {
         console.log('User registered successfully!');

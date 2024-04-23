@@ -2,7 +2,6 @@ package com.registration.reg.Dto;
 // User Data Transfer Object
 public class UserDto {  
 
-
     private int id;
     private String firstName;
     private String lastName;

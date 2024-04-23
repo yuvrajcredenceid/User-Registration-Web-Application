@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import img from './assets/logo.png';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css';
+import { useNavigate } from 'react-router-dom';
 
 function Popup({ message, onClose }) {
   return (
@@ -17,6 +18,7 @@ function Popup({ message, onClose }) {
 }
 
 function CreateAccount() {
+  const navigateTo = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -44,7 +46,9 @@ function CreateAccount() {
     const numberRegex = /^\d+$/;
     return numberRegex.test(value);
   };
-
+  const handleClick = () => {
+    navigateTo('/test'); 
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -87,7 +91,7 @@ function CreateAccount() {
     
     try {
       const response = await fetch("http://54.252.169.176:8081/api/v1/user/save", requestOptions);
-      
+      // const response = await fetch("http://localhost:8081/api/v1/user/save", requestOptions);
       if (response.ok) {
         console.log('User registered successfully!');
         const data = await response.text(); // get text response
@@ -101,7 +105,7 @@ function CreateAccount() {
       }
     } catch (error) {
       console.error('Error registering user:', error);
-      setPopupMessage(error.message); // Set the error message
+      setPopupMessage(error.message); 
       setShowPopup(true);
     }
     // try {
@@ -208,6 +212,9 @@ function CreateAccount() {
             <button type="submit">Register</button>
           </div>
         </form>
+        <button style={{ marginRight: 20 }}  onClick={handleClick}>
+          Test
+        </button>
       </div>
     </>
   );

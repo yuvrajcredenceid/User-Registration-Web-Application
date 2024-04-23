@@ -4,4 +4,5 @@ import com.registration.reg.Dto.UserDto;
 
 public interface UserService {
     String addUser(UserDto userDto);
+    UserDto getUserByEmail(String email);
 }

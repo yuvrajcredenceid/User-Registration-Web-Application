@@ -6,12 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.registration.reg.Entity.User;
 
-
 @EnableJpaRepositories
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer>{
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
+    User findByEmail(String email);
 }
-
-

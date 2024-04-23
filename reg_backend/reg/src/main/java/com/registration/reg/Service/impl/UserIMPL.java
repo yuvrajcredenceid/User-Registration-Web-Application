@@ -17,7 +17,7 @@ public class UserIMPL implements UserService{
 
     @Override
     public String addUser(UserDto userDto) {
-        if (userRepo.existsByEmail(userDto.getemail())  || userRepo.existsByPhone(userDto.getphone())) {
+        if (userRepo.existsByEmail(userDto.getemail()) || userRepo.existsByPhone(userDto.getphone())) {
             return "User already exists";
         }
 
@@ -31,7 +31,23 @@ public class UserIMPL implements UserService{
             userDto.getlocation()
             );
         userRepo.save(user);
-    return user.getFirstName()+" Registered Successfully";
+        return user.getFirstName()+" Registered Successfully";
+    }
+
+    @Override
+    public UserDto getUserByEmail(String email) {
+        User user = userRepo.findByEmail(email);
+        if (user == null) {
+            return null;
+        }
+        return new UserDto(
+            user.getId(),
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getPhone(),
+            user.getAge(),
+            user.getLocation()
+        );
     }
 }
-

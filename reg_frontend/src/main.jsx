@@ -1,10 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreateAccount from './App';
+import Test from './test'; 
+import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+ReactDOM.render(
+  <Router>
+    <Routes>
+      <Route path="/" element={<CreateAccount />} />
+      <Route path="/test" element={<Test />} />
+    </Routes>
+  </Router>,
+  document.getElementById('root')
+);
